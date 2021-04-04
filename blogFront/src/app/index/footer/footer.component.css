@@ -1,0 +1,116 @@
+#footer {
+  background: #35302F;
+  height: 220px;
+  padding: 30px 10px 0px 10px;
+}
+
+.footerlist {
+}
+
+.footerlogo {
+}
+
+ul li {
+  list-style: none;
+}
+
+ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.description a {
+  color: #404040 !important;
+  text-decoration: none;
+
+}
+
+.description a:hover {
+  color: orange !important;
+}
+
+p {
+  color: white !important;
+}
+
+#footeralt {
+  height: 68px;
+  background: black;
+  display: block;
+  color: white !important;
+  /* padding: 10px; */
+  /* width: 30px; */
+}
+
+.notification-box {
+  position: fixed;
+  bottom: 15px;
+  color: #404040;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  display: inline-block;
+  font-size: 0;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 9999;
+  left: 50%;
+  transition: bottom .5s ease-in-out;
+}
+
+.notification-box .description {
+  font-size: 12px;
+  color: #142223;
+
+  font-weight: normal;
+  line-height: 1.33;
+  padding: 9px 70px 9px 20px;
+}
+
+.notification-box .close-icon {
+  font-size: 10px;
+  color: #999999;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  opacity: 1;
+  cursor: pointer;
+  padding: 5px;
+  transition: all 150ms ease-in-out;
+  background: none;
+  display: "";
+}
+
+.inputmail {
+  float: left;
+  padding: 5px;
+  border: none;
+  border-radius: 10px 0px 0px 10px !important;
+  border-top: 1px solid white !important;
+  width: 70% !important;
+  background: white !important;
+
+}
+
+.mailbutton {
+  float: left;
+  padding: 9px;
+  border-right: 1px solid;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-radius: 0px 10px 10px 0px;
+  height: 35px;
+  width: 20%;
+}
+
+button, input[type="button"], input[type="reset"], input[type="submit"] {
+  border: none;
+  border-radius: 30px;
+  background: #2ecc71;
+  color: #fff;
+  font-size: 15px;
+  line-height: 1;
+  padding: 1em 2em;
+}

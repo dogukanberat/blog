@@ -1,0 +1,88 @@
+
+
+<div class="openEvent" (click)="openCreateSlider()">
+  <div *ngIf="createSlider">Slider List</div>
+  <div *ngIf="!createSlider">Create Slider</div>
+</div>
+
+<div >
+  <ng-template #create>
+    <h3 class="text-center"> Create New Slider </h3>
+  </ng-template>
+  <div>
+
+
+    <form [formGroup]="sliderForm" (ngSubmit)="onSliderFormSubmit()" clrForm>
+      <div class="table-striped" style="margin:0 auto;">
+
+        <clr-input-container>
+          <label>Slider Image</label>
+          <input clrInput placeholder="New Slider Image" name="url"  formControlName="url"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+
+
+        <clr-input-container>
+          <label>Slider URL</label>
+          <input clrInput placeholder="New Slider Url" name="href"  formControlName="href"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+        <button class="btn btn-success" *ngIf="!sliderIdToUpdate">CREATE</button>
+        <button class="btn btn-primary" *ngIf="sliderIdToUpdate">UPDATE</button>
+
+
+
+      </div>
+    </form>
+    <br/>
+    <div class="text-center" *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+        Slider added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+        Slider already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+        Slider updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+        Slider deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+        Internal Server Error.
+      </div>
+    </div>
+    <ng-template #processing>
+      <p *ngIf="requestProcessing" >
+      <span class="spinner">
+</span>
+      </p>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="!createSlider">
+
+  <table class="table" *ngIf="allSliders">
+    <thead>
+    <tr>
+      <th>Slider Image</th>
+      <th>Slider Link</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of allSliders" >
+      <td><img src="{{item.url}}" width="400px"></td>
+      <td>{{item.href}}</td>
+      <td><i (click)="loadSliderToEdit(item.id)" class="fas fa-edit button"></i> </td>
+      <td><i (click)="deleteSlider(item.id)" class="fas fa-trash button"></i> </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>

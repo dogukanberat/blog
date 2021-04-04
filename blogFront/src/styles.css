@@ -1,0 +1,152 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'DINPro-Regular';
+  src: local('DINPro-Regular'), url('assets/DINPro-Regular_13937.woff') format('woff');
+}
+
+body {
+  font-family: 'DINPro-Regular', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background: #35302F;
+  color: #e8e7e7;
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+
+body p {
+  color: #e8e7e7 !important;
+
+}
+
+a {
+  color: #e8e7e7 !important;
+  text-decoration: none;
+}
+
+#header {
+  padding: 10px;
+  text-align: center;
+}
+
+.card {
+  background: #0D0D0D !important;
+  border: 1px solid #0c0c0c;
+  box-shadow: 0 0.125rem 0 0 #0c0c0c;
+}
+
+.sitewidth {
+  width: 80%; /*67%;*/
+  margin: 0 auto;
+}
+
+.clear {
+  clear: both;
+}
+
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+h3 {
+  text-align: center;
+  font-weight: 100;
+}
+
+.pay {
+  background: white;
+  width: 106%;
+  /* height: 78px; */
+  text-align: center;
+  border-radius: 15px 15px 0px 0px;
+  padding: 12px;
+  margin-top: 63px;
+  bottom: 0px;
+}
+
+.openEvent {
+  padding: 10px;
+  margin-top: 30px;
+  width: 135px;
+  -webkit-border-radius: 13px;
+  -moz-border-radius: 13px;
+  border-radius: 13px;
+  box-shadow: 4px 5px 5px -4px;
+}
+
+.openEvent:hover {
+  box-shadow: -2px 0px 7px -2px;
+}
+
+#content1 {
+  width: 100%;
+}
+
+#content2 {
+  width: 100%;
+}
+
+#content3 {
+  width: 100%;
+}
+
+#content4 {
+  width: 100%;
+}
+
+#content5 {
+  width: 100%;
+}
+
+#content6 {
+  width: 100%;
+}
+
+#content7 {
+  width: 100%;
+}
+
+#content8 {
+  width: 100%;
+}
+
+.header {
+  background: #0D0D0D;
+  height: 200px;
+
+}
+
+.head {
+  padding: 85px;
+  font-size: 45px;
+}
+
+.head ul {
+  float: right;
+}
+
+.head li {
+  list-style: none;
+  float: left;
+  padding: 5px;
+  color: white;
+  font-size: 14px;
+}
+
+.head li a {
+  color: #e8e7e7;
+  text-decoration: none;
+}
+
+.head li a:hover {
+  color: whitesmoke;
+}
+
+.cont {
+  background: #35302F;
+}

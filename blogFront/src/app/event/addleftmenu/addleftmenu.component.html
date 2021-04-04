@@ -1,0 +1,118 @@
+<div class="openEvent" (click)="openCreateMenu()">
+  <div *ngIf="createMenu">Menu List</div>
+  <div *ngIf="!createMenu">Create Menu</div>
+</div>
+
+<div>
+  <ng-template #create>
+    <h3 class="text-center"> Create New Menu </h3>
+  </ng-template>
+  <div>
+
+
+    <form [formGroup]="menuForm" (ngSubmit)="onMenuFormSubmit()" clrForm>
+      <div class="table-striped" style="margin:0 auto;">
+
+        <clr-input-container>
+          <label>Menu Name</label>
+          <input clrInput placeholder="New Menu Name" name="name" formControlName="name"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+
+
+        <clr-input-container>
+          <label>Menu Link</label>
+          <input clrInput placeholder="New Menu Url" name="url" formControlName="url"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+
+
+        <clr-input-container>
+          <label>Image Link</label>
+          <input clrInput placeholder="New Menu Url" name="imagelink" formControlName="imagelink"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+
+
+        <clr-select-container>
+          <label>SubMenu</label>
+          <select clrSelect formControlName="submenu" ngModel="{{submenu}}">
+            <option value="yes">yes</option>
+            <option value="no">no</option>
+          </select>
+          <clr-control-error>This field is required!</clr-control-error>
+        </clr-select-container>
+
+        <clr-select-container *ngIf="menuForm.value.submenu == 'yes'">
+          <label>Parent</label>
+          <select clrSelect formControlName="parent">
+            <option *ngFor="let parent of allParents" value="{{parent.name}}">{{parent.name}}</option>
+          </select>
+          <clr-control-error>This field is required!</clr-control-error>
+        </clr-select-container>
+
+        <button class="btn btn-success" *ngIf="!menuIdToUpdate">CREATE</button>
+        <button class="btn btn-primary" *ngIf="menuIdToUpdate">UPDATE</button>
+
+
+      </div>
+    </form>
+    <br/>
+    <div class="text-center" *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass]="'success'">
+        Menu added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass]="'success'">
+        Menu already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass]="'success'">
+        Menu updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass]="'success'">
+        Menu deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass]="'error'">
+        Internal Server Error.
+      </div>
+    </div>
+    <ng-template #processing>
+      <p *ngIf="requestProcessing">
+      <span class="spinner">
+</span>
+      </p>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="!createMenu">
+
+  <table class="table" *ngIf="allMenus">
+    <thead>
+    <tr>
+      <th>Menu ImageLink</th>
+      <th>Menu Name</th>
+      <th>Menu Link</th>
+      <th>Menu Parent</th>
+      <th>Submenu</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of allMenus">
+      <td><img width="40px"  src="{{item.imagelink}}"></td>
+      <td>{{item.name}}</td>
+      <td>{{item.url}}</td>
+      <td>{{item.parent}}</td>
+      <td>{{item.submenu}}</td>
+      <td><i (click)="loadMenuToEdit(item.id)" class="fas fa-edit button"></i></td>
+      <td><i (click)="deleteMenu(item.id)" class="fas fa-trash button"></i></td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,64 @@
+<div id="footer" class="sitewidth" style="text-align: center;">
+
+  <img src="../../../assets/orta.png" style="width:100%">
+
+  <div style="margin-top:100px;text-align: center;">
+
+    <p style="font-weight: lighter;
+    font-size: 23px;
+    font-color: white;
+    text-shadow: 0 0 black;">THE METROPOL SOCIAL NETWORKS</p>
+
+    <ul style="width : 100%; text-align:center; margin-top:20px;">
+
+      <li *ngFor="let item of allFooters" style="float:left;       display:inline-block;      float:none; margin:10px;">
+        <a href="{{item.name}}"><img src="{{item.url}}"> </a></li>
+
+    </ul>
+
+    <div class="clear"></div>
+
+  </div>
+
+</div>
+
+<div class="clear"></div>
+
+<!--<div id="footeralt">
+
+  <div class="sitewidth" style="text-align:center;    font-weight: bolder;">
+
+    <p style="float:left;"> E bültenimize hemen kayıt ol, etkinliklerden haberdar ol ! </p>
+
+
+    <div style="float: right;width: 40%;     margin-top: 18px;">
+
+      <form [formGroup]="followerForm" (ngSubmit)="onFollowerFormSubmit()">
+        <div class="table-striped" style="margin:0 auto;">
+
+          <input class="inputmail" placeholder="New Follower Mail" name="mail" formControlName="mail"/>
+          <button class="mailbutton" style="float:left;">Gönder</button>
+
+
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+  <div class="clear"></div>
+
+</div>-->
+
+
+<div class="notification-box" id="cerezss">
+  <section class="body">
+    <div class="description">
+      <a href="/pages?id=5" target="_blank" rel="nofollow">Kişisel Verilerin Korunması</a>,
+      <a href="/pages?id=3" target="_blank" rel="nofollow">Gizlilik Politikası</a> ve
+      <a href="/pages?id=4" target="_blank" rel="nofollow">Çerez (Cookie)</a>
+      Kullanımı İlkeleri hakkında bilgilendirme
+    </div>
+    <button (click)="closePrivacy()" class="icon icon-close close-icon">X</button>
+  </section>
+</div>

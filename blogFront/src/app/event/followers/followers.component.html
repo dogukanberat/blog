@@ -1,0 +1,81 @@
+
+
+<div class="openEvent" (click)="openCreateFollower()">
+  <div *ngIf="createFollower">Follower List</div>
+  <div *ngIf="!createFollower">Create Follower</div>
+</div>
+
+<div >
+  <ng-template #create>
+    <h3 class="text-center"> Create New Follower </h3>
+  </ng-template>
+  <div>
+
+
+    <form [formGroup]="followerForm" (ngSubmit)="onFollowerFormSubmit()" clrForm>
+      <div class="table-striped" style="margin:0 auto;">
+
+        <clr-input-container>
+          <label>Follower Mail</label>
+          <input clrInput placeholder="New Follower Mail" name="mail"  formControlName="mail"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+
+        <button class="btn btn-success" *ngIf="!followerIdToUpdate">CREATE</button>
+        <button class="btn btn-primary" *ngIf="followerIdToUpdate">UPDATE</button>
+
+
+
+      </div>
+    </form>
+    <br/>
+    <div class="text-center" *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+        Follower added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+        Follower already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+        Follower updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+        Follower deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+        Internal Server Error.
+      </div>
+    </div>
+    <ng-template #processing>
+      <p *ngIf="requestProcessing" >
+      <span class="spinner">
+</span>
+      </p>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="!createFollower">
+
+  <table class="table" *ngIf="allFollowers">
+    <thead>
+    <tr>
+      <th>Follower ID</th>
+      <th>Follower Mail</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of allFollowers" >
+      <td>{{item.id}}</td>
+      <td>{{item.mail}}</td>
+      <td><i (click)="loadFollowerToEdit(item.id)" class="fas fa-edit button"></i> </td>
+      <td><i (click)="deleteFollower(item.id)" class="fas fa-trash button"></i> </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>

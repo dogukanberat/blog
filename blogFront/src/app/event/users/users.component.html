@@ -1,0 +1,109 @@
+
+
+<div class="openEvent" (click)="openCreateUser()">
+  <div *ngIf="createUser">User List</div>
+  <div *ngIf="!createUser">Create User</div>
+</div>
+
+<div >
+  <ng-template #create>
+    <h3 class="text-center"> Create New User </h3>
+  </ng-template>
+  <div>
+
+
+
+    <form [formGroup]="userForm" (ngSubmit)="onUserFormSubmit()" clrForm>
+      <div class="table-striped" style="margin:0 auto;">
+
+        <clr-input-container>
+          <label>User Name</label>
+          <input clrInput placeholder="New User Name" name="uName"  formControlName="uName"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+        <clr-input-container>
+          <label>User Pass</label>
+          <input clrInput placeholder="New User Pass" name="pW"  formControlName="pW"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+
+        <clr-select-container>
+          <label>New User Type</label>
+          <select clrSelect formControlName="uType">
+            <option value="user">User</option>
+            <option value="author">Author</option>
+            <option value="admin">Admin</option>
+          </select>
+          <clr-control-error>This field is required!</clr-control-error>
+        </clr-select-container>
+
+
+
+
+        <button class="btn btn-success" *ngIf="!userIdToUpdate">CREATE</button>
+        <button class="btn btn-primary" *ngIf="userIdToUpdate">UPDATE</button>
+
+
+
+      </div>
+    </form>
+    <br/>
+    <div class="text-center" *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+        User added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+        User already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+        User updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+        User deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+        Internal Server Error.
+      </div>
+    </div>
+    <ng-template #processing>
+      <p *ngIf="requestProcessing" >
+      <span class="spinner">
+</span>
+      </p>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="!createUser">
+
+  <table class="table" *ngIf="allUsers">
+    <thead>
+    <tr>
+      <th>User ID</th>
+      <th>User Name</th>
+      <th>User Pass</th>
+      <th>User Type</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of allUsers" >
+      <td>{{item.id}}</td>
+      <td>{{item.uName}}</td>
+      <td>{{item.pW}}</td>
+      <td>{{item.uType}}</td>
+      <td><i (click)="loadUserToEdit(item.id)" class="fas fa-edit button"></i> </td>
+      <td><i (click)="deleteUser(item.id)" class="fas fa-trash button"></i> </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+  <b>Admin</b>  : ALL PRIVILAGES <br> <br>
+  <b>User</b>  : JUST USER <br> <br>
+  <b>Author</b> : EVENT,CATEGORY,SLIDER,FILE UPLOAD <br>
+
+</div>

@@ -1,0 +1,88 @@
+
+
+<div class="openEvent" (click)="openCreateFooter()">
+  <div *ngIf="createFooter">Footer List</div>
+  <div *ngIf="!createFooter">Create Footer</div>
+</div>
+
+<div >
+  <ng-template #create>
+    <h3 class="text-center"> Create New Footer </h3>
+  </ng-template>
+  <div>
+
+
+    <form [formGroup]="footerForm" (ngSubmit)="onFooterFormSubmit()" clrForm>
+      <div class="table-striped" style="margin:0 auto;">
+
+        <clr-input-container>
+          <label>Footer Name</label>
+          <input clrInput placeholder="New Footer Name" name="name"  formControlName="name"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+
+
+        <clr-input-container>
+          <label>Footer Link</label>
+          <input clrInput placeholder="New Footer Url" name="url"  formControlName="url"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+        <button class="btn btn-success" *ngIf="!footerIdToUpdate">CREATE</button>
+        <button class="btn btn-primary" *ngIf="footerIdToUpdate">UPDATE</button>
+
+
+
+      </div>
+    </form>
+    <br/>
+    <div class="text-center" *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+        Footer added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+        Footer already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+        Footer updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+        Footer deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+        Internal Server Error.
+      </div>
+    </div>
+    <ng-template #processing>
+      <p *ngIf="requestProcessing" >
+      <span class="spinner">
+</span>
+      </p>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="!createFooter">
+
+  <table class="table" *ngIf="allFooters">
+    <thead>
+    <tr>
+      <th>Footer Name</th>
+      <th>Footer Link</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of allFooters" >
+      <td>{{item.name}}</td>
+      <td>{{item.url}}</td>
+      <td><i (click)="loadFooterToEdit(item.id)" class="fas fa-edit button"></i> </td>
+      <td><i (click)="deleteFooter(item.id)" class="fas fa-trash button"></i> </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>

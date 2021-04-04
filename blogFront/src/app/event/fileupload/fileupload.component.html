@@ -1,0 +1,48 @@
+<div>
+
+  <div>
+
+
+    <br/>
+    <ng-template #processing>
+      <p *ngIf="requestProcessing">
+      <span class="spinner">
+</span>
+      </p>
+    </ng-template>
+  </div>
+</div>
+
+
+<table class="table" *ngIf="allUploadLinks">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Resim</th>
+    <th>UploadLink</th>
+    <th>Delete</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of allUploadLinks">
+    <td>{{item.id}}</td>
+    <td><img width="100px" src="{{link}}{{item.link}}"></td>
+    <td>{{link}}{{item.link}}</td>
+    <td><i (click)="deleteUploadLink(item.id)" class="fas fa-trash button"></i></td>
+
+  </tr>
+  </tbody>
+</table>
+
+
+<div class="file-upload">
+  <input type="file" name="image" ng2FileSelect [uploader]="uploader" accept="image/x-png,image/gif,image/jpeg,zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"/>
+  <button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+    Upload
+  </button>
+</div>
+
+
+
+

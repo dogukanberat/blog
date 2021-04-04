@@ -1,0 +1,80 @@
+
+
+<div class="openEvent" (click)="openCreateCategory()">
+  <div *ngIf="createCategory">Category List</div>
+  <div *ngIf="!createCategory">Create Category</div>
+</div>
+
+<div >
+  <ng-template #create>
+    <h3 class="text-center"> Create New Category </h3>
+  </ng-template>
+  <div>
+
+
+    <form [formGroup]="categoryForm" (ngSubmit)="onCategoryFormSubmit()" clrForm>
+      <div class="table-striped" style="margin:0 auto;">
+
+        <clr-input-container>
+          <label>Category Name</label>
+          <input clrInput placeholder="New Category Name" name="category"  formControlName="category"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+        <button class="btn btn-success" *ngIf="!categoryIdToUpdate">CREATE</button>
+        <button class="btn btn-primary" *ngIf="categoryIdToUpdate">UPDATE</button>
+
+
+
+      </div>
+    </form>
+    <br/>
+    <div class="text-center" *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+        Category added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+        Category already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+        Category updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+        Category deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+        Internal Server Error.
+      </div>
+    </div>
+    <ng-template #processing>
+      <p *ngIf="requestProcessing" >
+      <span class="spinner">
+</span>
+      </p>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="!createCategory">
+
+  <table class="table" *ngIf="allCategorys">
+    <thead>
+    <tr>
+      <th> Id</th>
+      <th>Category Name</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of allCategorys" >
+      <td>{{item.id}}</td>
+      <td><a target="_blank"  href="../categories?id={{item.id}}">{{item.category}}</a></td>
+      <td><i (click)="loadCategoryToEdit(item.id)" class="fas fa-edit button"></i> </td>
+      <td><i (click)="deleteCategory(item.id)" class="fas fa-trash button"></i> </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,133 @@
+<div *ngIf="loginform">
+
+
+
+  <div class="login-wrapper">
+    <form class="login" [formGroup]="loginForm" (ngSubmit)="loginFormSubmit()">
+      <section class="title">
+        <h3 class="welcome">Welcome to</h3>
+        The Metropol
+      </section>
+      <div class="login-group">
+        <clr-input-container>
+          <label class="clr-sr-only">Username</label>
+          <input type="text" name="username" clrInput placeholder="Username" formControlName="id"/>
+        </clr-input-container>
+        <clr-password-container>
+          <label class="clr-sr-only">Password</label>
+          <input type="password" name="password" clrPassword placeholder="Password" formControlName="pw"/>
+        </clr-password-container>
+
+        <div *ngIf="idpwErr" class="error active">
+          Invalid user name or password
+        </div>
+        <button type="submit" class="btn btn-primary">NEXT</button>
+      </div>
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div *ngIf="loggedin">
+
+
+
+  <header class="header header-3" style="height: 60px;">
+    <div class="branding">
+      <a href="#" class="nav-link">
+        <img src="https://owebsitesi.com/wp-content/uploads/2019/07/oweblogo1.png" width="150px" height="50px">
+      </a>
+    </div>
+    <div class="header-nav">
+      <a href="javascript://" class="active nav-link nav-text">Admin Panel</a>
+      <a href="/" target="_blank" class="nav-link nav-text">Siteyi Görüntüle</a>
+    </div>
+    <div class="header-actions">
+      <a (click)="logout()" class="nav-link nav-text">
+        Log Out
+      </a>
+    </div>
+  </header>
+
+
+
+
+
+
+
+
+  <clr-tabs clrLayout="vertical">
+    <clr-tab *ngIf="author || admin">
+      <button clrTabLink id="link1">DJ's</button>
+      <clr-tab-content id="content1" style="width: 100%;" *clrIfActive="true">
+        <app-events></app-events>
+      </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="admin">
+      <button clrTabLink>Page's</button>
+      <clr-tab-content id="content5" style="width: 100%;" *clrIfActive>
+        <app-addpage></app-addpage>
+      </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="author || admin">
+      <button clrTabLink>Category</button>
+      <clr-tab-content id="content2" style="width: 100%;" *clrIfActive>
+        <app-category></app-category>
+      </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="author || admin">
+      <button clrTabLink>Slider</button>
+      <clr-tab-content id="content3" style="width: 100%;" *clrIfActive>
+        <app-slider-add></app-slider-add>
+      </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="author || admin">
+      <button clrTabLink>File Upload</button>
+      <clr-tab-content id="content6" style="width: 100%;" *clrIfActive>
+        <app-fileupload></app-fileupload>
+      </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="admin">
+      <button clrTabLink>Footer Links</button>
+      <clr-tab-content id="content4" style="width: 100%;" *clrIfActive>
+        <app-footerlink></app-footerlink>
+      </clr-tab-content>
+    </clr-tab>
+    <clr-tab *ngIf="admin">
+      <button clrTabLink>Users</button>
+      <clr-tab-content id="content7" style="width: 100%;" *clrIfActive>
+        <app-users></app-users>
+      </clr-tab-content>
+    </clr-tab>
+    <clr-tab  *ngIf="admin">
+      <button clrTabLink>Followers</button>
+      <clr-tab-content id="content8" style="width: 100%;" *clrIfActive>
+        <app-followers></app-followers>
+      </clr-tab-content>
+    </clr-tab>
+    <clr-tab  *ngIf="admin">
+      <button clrTabLink>Left Menu</button>
+      <clr-tab-content id="content9" style="width: 100%;" *clrIfActive>
+        <app-addleftmenu></app-addleftmenu>
+      </clr-tab-content>
+    </clr-tab>
+
+
+
+
+  </clr-tabs>
+</div>

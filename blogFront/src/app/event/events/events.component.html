@@ -1,0 +1,116 @@
+
+<div class="openEvent" (click)="openCreateEvent()">
+  <div *ngIf="createEvent">Event List</div>
+  <div *ngIf="!createEvent">Create Event</div>
+</div>
+
+<div *ngIf="createEvent">
+  <ng-template #create>
+    <h3 class="text-center"> Create New Event </h3>
+  </ng-template>
+  <div>
+
+    <form [formGroup]="eventForm" (ngSubmit)="onEventFormSubmit()" clrForm>
+
+      <clr-input-container>
+        <label>Dj Name</label>
+        <input clrInput placeholder="New Event Name" name="title"  formControlName="title"/>
+        <clr-control-error>This field is required!</clr-control-error>
+
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Send Mail</label>
+        <input clrInput placeholder="New Mail adress" name="email"  formControlName="email"/>
+
+      </clr-input-container>
+
+      <clr-select-container>
+        <label>Dj Category</label>
+          <select clrSelect formControlName="category">
+            <option *ngFor="let cat of allCategorys" value="{{cat.category}}">{{cat.category}}</option>
+          </select>
+        <clr-control-error>This field is required!</clr-control-error>
+</clr-select-container>
+
+        <clr-input-container>
+          <label>Dj ImageLink</label>
+          <input clrInput placeholder="Event ImageLink" name="image"  formControlName="image"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+
+        <clr-input-container>
+          <label>Press Kit Link</label>
+          <input clrInput placeholder="Press Kit Link" name="iframeLink"  formControlName="iframeLink"/>
+          <clr-control-error>This field is required!</clr-control-error>
+
+        </clr-input-container>
+
+      <label>Description</label>
+      <ejs-richtexteditor formControlName="descR"></ejs-richtexteditor>
+      <label *ngIf="eventForm.get('descR').invalid && processValidation" [ngClass] = "'error'"> Description is required. </label>
+
+      <label>DJ Description</label>
+      <ejs-richtexteditor formControlName="descRDJ"></ejs-richtexteditor>
+      <label *ngIf="eventForm.get('descRDJ').invalid && processValidation" [ngClass] = "'error'">DJ Description is required. </label>
+
+
+
+
+      <button class="btn btn-default" *ngIf="!eventIdToUpdate">CREATE</button>
+          <button class="btn btn-default" *ngIf="eventIdToUpdate">UPDATE</button>
+          <button (click)="backToCreateEvent()" *ngIf="eventIdToUpdate">Add New</button>
+    </form>
+    <br/>
+    <div class="text-center" *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+        Event added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+        Event already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+        Event updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+        Event deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+        Internal Server Error.
+      </div>
+    </div>
+    <ng-template #processing>
+      <p *ngIf="requestProcessing" >
+      <span class="spinner">
+</span>
+      </p>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="!createEvent">
+
+  <table class="table" *ngIf="allEvents">
+    <thead>
+    <tr>
+      <th> Id</th>
+      <th>Event Name</th>
+      <th>Category</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of allEvents" >
+      <td>{{item.id}}</td>
+      <td><a target="_blank" href="../product?id={{item.id}}">{{item.title}}</a></td>
+      <td>{{item.category}}</td>
+      <td><i (click)="loadEventToEdit(item.id)" class="fas fa-edit button"></i> </td>
+      <td><i (click)="deleteEvent(item.id)" class="fas fa-trash button"></i> </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>

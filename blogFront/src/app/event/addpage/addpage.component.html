@@ -1,0 +1,93 @@
+
+<div class="openEvent" (click)="openCreatePage()">
+  <div *ngIf="createPage">Page List</div>
+  <div *ngIf="!createPage">Create Page</div>
+</div>
+
+<div *ngIf="createPage">
+  <ng-template #create>
+    <h3 class="text-center"> Create New Page </h3>
+  </ng-template>
+  <div>
+
+    <form [formGroup]="pageForm" (ngSubmit)="onPageFormSubmit()" clrForm>
+
+      <clr-input-container>
+        <label>Page Name</label>
+        <input clrInput placeholder="New Page Name" name="title"  formControlName="title"/>
+        <clr-control-error>This field is required!</clr-control-error>
+
+      </clr-input-container>
+      <clr-select-container>
+        <label>Page Category</label>
+        <select clrSelect formControlName="category">
+          <option *ngFor="let cat of allCategorys" value="{{cat.category}}">{{cat.category}}</option>
+        </select>
+        <clr-control-error>This field is required!</clr-control-error>
+      </clr-select-container>
+
+
+
+      <br /><br />
+      <label><b>Description</b></label><br />
+      <ejs-richtexteditor formControlName="descR"></ejs-richtexteditor>
+      <label *ngIf="pageForm.get('descR').invalid && processValidation" [ngClass] = "'error'"> Description is required. </label>
+
+
+
+      <button class="btn btn-default" *ngIf="!pageIdToUpdate">CREATE</button>
+      <button class="btn btn-default" *ngIf="pageIdToUpdate">UPDATE</button>
+      <button (click)="backToCreatePage()" *ngIf="pageIdToUpdate">Add New</button>
+    </form>
+    <br/>
+    <div class="text-center" *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+        Page added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+        Page already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+        Page updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+        Page deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+        Internal Server Error.
+      </div>
+    </div>
+    <ng-template #processing>
+      <p *ngIf="requestProcessing" >
+      <span class="spinner">
+</span>
+      </p>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="!createPage">
+
+  <table class="table" *ngIf="allPages">
+    <thead>
+    <tr>
+      <th> Id</th>
+      <th>Page Name</th>
+      <th>Category</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of allPages" >
+      <td>{{item.id}}</td>
+      <td><a target="_blank"  href="../pages?id={{item.id}}">{{item.title}}</a></td>
+      <td>{{item.category}}</td>
+      <td><i (click)="loadPageToEdit(item.id)" class="fas fa-edit button"></i> </td>
+      <td><i (click)="deletePage(item.id)" class="fas fa-trash button"></i> </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>

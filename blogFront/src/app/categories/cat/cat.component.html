@@ -1,0 +1,43 @@
+ <div class="clr-row" *ngIf="catElements" style="margin-top: -48px;">
+      <div class="clr-col-lg-12 clr-col-16">
+        <div class="card">
+          <div class="card-header">
+            {{catName}}
+          </div>
+
+
+          <div class="card-block">
+
+
+
+
+
+            <div class="clr-col-lg-4 clr-col-12" style="float:left;     height: 300px;" *ngFor="let event of catElements" >
+              <a href="/product?id={{event.id}}" class="card clickable">
+                <div class="card-img">
+                  <img src="{{event.image}}" alt="{{event.title}}" />
+                </div>
+                <div class="card-block">
+                  <p class="card-text">
+                    {{event.title}}
+                  </p>
+                </div>
+              </a>
+            </div>
+
+
+
+            <div class="clear"></div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+<div id="mainsliderarea2">
+
+  <div class="solmenu">
+    <ul>
+
+
+      <li *ngFor="let data of parLinks">
+        <a href="{{data.url}}">
+
+          <div class="solmenulog">
+            <img width="25px" style="max-height:25px;"  src="{{data.imagelink}}">
+          </div>
+          <div class="soltext">{{data.name}}</div>
+
+        </a>
+
+
+        <ul *ngIf="subLinks">
+
+          <div *ngFor="let sub of subLinks">
+            <li *ngIf="data.name == sub.parent">
+              <a href="{{sub.url}}">
+
+                <div class="solmenulog">
+                  <img width="25px" style="max-height:25px;" src="{{sub.imagelink}}">
+                </div>
+                <div class="soltext">{{sub.name}}</div>
+
+              </a>
+
+            </li>
+          </div>
+
+        </ul>
+      </li>
+
+
+    </ul>
+  </div>
+
+</div>
